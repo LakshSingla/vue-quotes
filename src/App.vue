@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Wonderful quotes</h1>
     <div id="main">
-      <counter-wrapper ></counter-wrapper>
+      <counter-wrapper :length="noOfQuotes"></counter-wrapper>
       <addquote-wrapper @newQuote = "newQuote"></addquote-wrapper>
       <div id="quote-wrapper" class="row">
         <quoteComp v-for="(quote, index) in quotes" :key="index" :quoteText="quote" :quoteOrder="index" @deleteQuote="deleteQuote">
@@ -42,18 +42,24 @@ export default {
   }, 
   data() {
     return {
-      quotes : [ "This is just a string" , "Tis is just another string", "Lazy to bed, early", "You suck ass"]
+      quotes : new Array()
     }
   }, 
   methods: {
     newQuote(quote){
-      this.quotes.push(quote);
-    },
-    lol() {
-      console.log('Lol this works too????');
+      if(this.noOfQuotes < 10)  this.quotes.push(quote);
+      else{
+         M.toast( {html: ' Maximum of 10 quotes allowed at a time. Please delete some before adding other one'});
+         M.toast.dismissAll();
+      }
     },
     deleteQuote(quoteNumber){
       this.quotes.splice(quoteNumber, 1);
+    }
+  },
+  computed : {
+    noOfQuotes() {
+      return this.quotes.length;
     }
   }
 }
@@ -82,7 +88,7 @@ export default {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 4.2rem;
 }
 
 #quote-wrapper{

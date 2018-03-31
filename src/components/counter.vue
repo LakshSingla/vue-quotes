@@ -1,6 +1,6 @@
 <template>
   <div class="progress">
-      <div class="determinate" :style="{width : (noOfComponents * 10) + '%'}"></div>
+      <div class="determinate" :style="{width : (length * 10) + '%'}"></div>
   </div>
 </template>
 
@@ -10,6 +10,9 @@ export default {
         return {
             noOfComponents : 5
         };
+    },
+    props:{
+        length : Number
     }
 }
 </script>
