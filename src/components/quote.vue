@@ -1,5 +1,5 @@
 <template>
-    <section class="col z-depth-3" @mouseover="changeBgCol($event)" @click="removeQuote">
+    <section class="col z-depth-3"  @click="removeQuote">
         {{ quoteOrder + 1 }}
         {{ quoteText }}
     </section>
@@ -12,12 +12,8 @@ export default {
         quoteText: String
     },
     methods: {
-        changeBgCol(ev){
-            console.log("This is working");
-            console.log(ev)
-        },
         removeQuote(ev) {
-            console.log("Remove quote event handler is working");
+            this.$emit('deleteQuote', this.quoteOrder);
         }
 
     } 

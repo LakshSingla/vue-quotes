@@ -9,13 +9,13 @@ import './assets/js/jquery-3.3.1.js'
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
+
+let eventHub = new Vue();
+
+Vue.prototype.$eventHub = eventHub;
+
 new Vue({
   el: '#app',
   components: { App },
   template: '<App/>'
 })
-
-const eventBus = new Vue();
-
-export { eventBus };
-
