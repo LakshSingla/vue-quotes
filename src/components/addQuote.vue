@@ -16,6 +16,9 @@
 
 <script>
 
+import {eventBus} from '../main'
+import {eventBus as eventBusApp} from '../App.vue'
+
 export default {
     data() {
         return {
@@ -27,9 +30,8 @@ export default {
             let trimmedQuote = this.quote.trim();
             if(trimmedQuote.length != 0) {
                 this.$emit('newQuote', trimmedQuote);
-                console.log("Before clearing the quote");
                 this.quote = '';
-                console.log("After clearing the quote");
+                eventBus.$emit('newQuote', trimmedQuote);
             }
         }, 
         isEnter(ev) {
@@ -48,7 +50,7 @@ export default {
 }
 textarea {
     color : #333333;
-    font-family: angel;
+    font-family: lucida;
     font-size: 28px;
 }
 

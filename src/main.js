@@ -10,12 +10,12 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 
-let eventHub = new Vue();
-
-Vue.prototype.$eventHub = eventHub;
+let eventBus = new Vue();
 
 new Vue({
   el: '#app',
   components: { App },
   template: '<App/>'
 })
+
+export { eventBus }

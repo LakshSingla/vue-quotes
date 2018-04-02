@@ -3,7 +3,7 @@
     <h1>Wonderful quotes</h1>
     <div id="main">
       <counter-wrapper :length="noOfQuotes"></counter-wrapper>
-      <addquote-wrapper @newQuote = "newQuote"></addquote-wrapper>
+      <addquote-wrapper></addquote-wrapper>
       <div id="quote-wrapper" class="row">
         <quoteComp v-for="(quote, index) in quotes" :key="index" :quoteText="quote" :quoteOrder="index" @deleteQuote="deleteQuote">
         </quoteComp>
@@ -27,13 +27,13 @@ import {eventBus} from './main.js'
 export default {
   name: 'App',
   created() {
-    eventBus.$on('New Quote', function( quote ) {
+    console.log(eventBus);
+    eventBus.$on('newQuote', quote =>  {
       console.log('"New Quote" event registered on the eventBus');
+      this.newQuote(quote);
     });
-    this.$eventHub.$on('lol', function(quote) {
-      console.log(quote);
-      console.log('Hurray !! The event bus is working ');
-    });
+    eventBus.$on('deleteQuote', (qn, srt) => this.quotes.splice(qn, 1));
+    console.log('Outside the eventBus lifecycle hook');
   },
   components : {
     counterWrapper : counter, 
@@ -63,6 +63,7 @@ export default {
     }
   }
 }
+export {eventBus}
 </script>
 
 <style>

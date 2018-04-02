@@ -7,6 +7,9 @@
 </template>
 
 <script>
+
+import {eventBus} from '../main.js'
+
 export default {
     props: {
         quoteOrder : Number,
@@ -14,7 +17,7 @@ export default {
     },
     methods: {
         removeQuote(ev) {
-            this.$emit('deleteQuote', this.quoteOrder);
+            eventBus.$emit('deleteQuote', this.quoteOrder, 'someRandomShit');
         },
 
     } ,
